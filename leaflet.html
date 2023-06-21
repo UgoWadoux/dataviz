@@ -90,6 +90,25 @@
 <section class="graphiqueUN">
     <h1 id="phraseDEUX">Evolution du prix moyen du Carburant en France</h1>
     <div class="metLeGraphique">
+        <?php
+$pdo = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
+//$query = $pdo->query('SELECT * FROM carburant');
+        //$post = $query->fetchAll();
+        //echo '<pre>';
+//print_r($post);
+//echo '</pre>';
+        //phpinfo();
+        //try
+        //{
+        //    $connexion = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
+        //}
+        //
+        //catch(Exception $e)
+        //{
+        //    echo 'Erreur : '.$e->getMessage().'<br />';
+        //    echo 'N° : '.$e->getCode();
+        //}
+        ?>
     </div>
     <h3 class="expDEUX">Sur ce graphique , vous pouvez voir la moyenne des prix de carburants  en France representer entre 2007 jusqu’en 2023 . </h3>
     <h3 class="expTROIS">Nous pouvons voir une augmentation remarcable , nous avons  commencé a envrion 1 euro , puis d’année en année le prix n’a fais que augmenter jusqu’a arrivé a 2 euros ! </h3>
