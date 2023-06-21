@@ -1,0 +1,13 @@
+h1{
+    margin: 60px;
+    text-align: center;
+
+}
+
+#map {
+    height: 750px;
+    width: 750px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+};
