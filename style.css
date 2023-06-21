@@ -8,10 +8,10 @@ h1{
     text-align: center;
 
 }
-section.row{
+main section.row{
     padding-right: 100px;
     padding-left: 100px;
-    box-shadow: 0px 0px 15px 5px black;
+    box-shadow: 0px 0px 18px 2px black;
 }
 .column{
     flex: 1;
@@ -51,4 +51,8 @@ section.row{
 .expQUATRE{
     text-align: center;
     padding-bottom: 300px;
+}
+footer{
+    background-color: #343A40;
+    text-decoration: white;
 }
