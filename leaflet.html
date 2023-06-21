@@ -27,24 +27,79 @@
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                 </span>
-                <button type="button" class="btn btn-outline-success">Success</button>
+                <button type="button" class="btn btn-outline-success">Entrée</button>
         </div>
     </nav>
 </header>
-
-
-<div class="wrapper">
-    <div class="contact">
-        <h1>Station a Anneecy</h1>
+<main>
+    <div class="pageUN">
+        <img src="img/pexels.jpg" height="500" width="1700">
+        <h2>En un coup d'oeil</h2>
+    <p>Mise a jour le :jj/mm/aa</p>
     </div>
-</div>
-<div id="map"></div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin="">
+    <section class="row">
+        <div class="column">
+            <h1>4600</h1>
+            <h5>En augmentation depuis 2022</h5>
+            <h5>Nombre de stations EN HAUTE-SAVOIE</h5>
+            <p>lE NOMBRE DE STATION-SERVICE EST EN CONSTANTE AUGMENTATION ET LA HAUTE-SAVOIE N’Y FAIT PAS EXCEPTION !</p>
+        </div>
+        <div class="column">
+            <h1>1.60</h1>
+            <h5>En augmentation depuis 2023</h5>
+            <h5>PRIX MOYEN DEPUIS 2023</h5>
+            <p>prix moyen de l’ÉSSENCE EN FRANCE LE PRIX MOYEN DE L’ÉSSENCE FACILEMENT ACCESSIBLE</p>
+        </div>
+        <div class="column">
+            <h1>8.6%</h1>
+            <h5>TAUX D’AUGMENTATION DEPUIS 2023</h5>
+            <h5>AUGMENTATION du prix EN POURCENTAGE</h5>
+            <p>L’ANNÉE 2023 A CONNU L’UNE DES CROISSANCES DE PRIX LES PLUS IMPORTANTES</p>
+        </div>
+        <div class="column">
+            <h1>1.65</h1>
+            <h5>En augmentation depuis 2023</h5>
+            <h5>COûT DE L’éSSENCE ACTUEL</h5>
+            <p>ACTUALISE CHAQUE JOUR IL S’AGIT DU PRIX MOYEN DE L’ESSENCE EN HAUTE SAVOIE</p>
+        </div>
+    </section>
+    <h2 class="expUN">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h2>
 
-</script>
-<script src="main.js"></script>
+<section class="map">
+    <div class="wrapper">
+        <div class="phrase">
+            <h1>Station a Annecy !</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                <div id="map"></div>
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                        crossorigin=""></script>
+                <script src="main.js"></script>
+            </div>
+            <div class="col-3">
+                <div id="photoOlfa"></div>
+                <img src="img/Capture%20d’écran%20du%202023-06-21%2015-12-47.png">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="graphiqueUN">
+    <h1 id="phraseDEUX">Evolution du prix moyen du Carburant en France</h1>
+    <div class="metLeGraphique">
+    </div>
+    <h3 class="expDEUX">Sur ce graphique , vous pouvez voir la moyenne des prix de carburants  en France representer entre 2007 jusqu’en 2023 . </h3>
+    <h3 class="expTROIS">Nous pouvons voir une augmentation remarcable , nous avons  commencé a envrion 1 euro , puis d’année en année le prix n’a fais que augmenter jusqu’a arrivé a 2 euros ! </h3>
+</section>
+<section class="graphiqueDEUX">
+
+</section>
+
+</main>
+
 
 </body>
 </html>
