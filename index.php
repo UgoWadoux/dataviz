@@ -5,10 +5,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""
-    />
+          crossorigin="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -92,26 +91,57 @@
         <div class="metLeGraphique">
             <?php
             $pdo = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
-            //$query = $pdo->query('SELECT * FROM carburant');
-            //$post = $query->fetchAll();
-            //echo '<pre>';
-            //print_r($post);
-            //echo '</pre>';
-            //phpinfo();
-            //try
-            //{
-            //    $connexion = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
-            //}
-            //
-            //catch(Exception $e)
-            //{
-            //    echo 'Erreur : '.$e->getMessage().'<br />';
-            //    echo 'N° : '.$e->getCode();
-            //}
+//            $query = $pdo->query('SELECT * FROM carburant');
+//            $post = $query->fetchAll();
+//            echo '<pre>';
+//            print_r($post);
+//            echo '</pre>';
+//            phpinfo();
+
+//            try
+//            {
+//                $connexion = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
+//            }
+//
+//            catch(Exception $e)
+//            {
+//                echo 'Erreur : '.$e->getMessage().'<br />';
+//                echo 'N° : '.$e->getCode();
+//            }
             ?>
+            <div id="phpLink">
+                <?php
+                $query = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
+                                JOIN carburant ON prix.carburant_id = carburant.id
+                               -- AND  carburant.nom = 'Gazole'
+                                AND(extract(YEAR from date)=2007
+                                OR extract(YEAR from date)=2014
+                                OR extract(YEAR from date)=2023)
+                                GROUP BY extract(YEAR from date)");
+
+                foreach ($query as $data)
+                {
+                    $avg[]=$data['avg'];
+                    $extract[]=$data['extract'];
+                };
+                ?>
+                <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
+                <?php include 'footer.php'?>
+                <script >const barCanvas = document.getElementById("barCanvas");
+                    // const moy2007= document.getElementById("phpLink")
+                    const barChart = new Chart(barCanvas,{
+                        type:"bar",
+                        data:{
+                            labels:<?php echo json_encode($extract)?>,
+                            datasets:[{
+                                data: <?php echo json_encode($avg)?>
+                            }]
+                        }
+                    })
+                </script>
         </div>
-        <h3 class="expDEUX">Sur ce graphique , vous pouvez voir la moyenne des prix de carburants  en France representer entre 2007 jusqu’en 2023 . </h3>
-        <h3 class="expTROIS">Nous pouvons voir une augmentation remarcable , nous avons  commencé a envrion 1 euro , puis d’année en année le prix n’a fais que augmenter jusqu’a arrivé a 2 euros ! </h3>
+        <h3 class="expDEUX">Sur ce graphique , vous pouvez voir la moyenne des prix de carburants en France representer entre 2007 jusqu’en 2023 . </h3>
+        <h3 class="expTROIS">Nous pouvons voir une augmentation remarcable , nous avons commencé a envrion 1 euro , puis d’année en année le prix n’a fais que augmenter jusqu’a arrivé a 2 euros ! </h3>
     </section>
     <section class="graphiqueDEUX">
         <h1 id="phraseTROIS">Evolution des prix moyens du carburant en France/Haute-savoie</h1>
