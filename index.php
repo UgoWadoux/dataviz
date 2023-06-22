@@ -125,8 +125,9 @@
                     $extract[]=$data['extract'];
                 };
                 ?>
+
                 <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
-                <?php include 'footer.php'?>
+
                 <script >const barCanvas = document.getElementById("barCanvas");
                     // const moy2007= document.getElementById("phpLink")
                     const barChart = new Chart(barCanvas,{
@@ -140,12 +141,22 @@
                     })
                 </script>
         </div>
+
+
+
+
+
+
+
         <h3 class="expDEUX">Sur ce graphique , vous pouvez voir la moyenne des prix de carburants en France representer entre 2007 jusqu’en 2023 . </h3>
         <h3 class="expTROIS">Nous pouvons voir une augmentation remarcable , nous avons commencé a envrion 1 euro , puis d’année en année le prix n’a fais que augmenter jusqu’a arrivé a 2 euros ! </h3>
     </section>
     <section class="graphiqueDEUX">
         <h1 id="phraseTROIS">Evolution des prix moyens du carburant en France/Haute-savoie</h1>
         <div class="metLeGraphiqueDeux">
+            <?php
+            require('graphiqueE10.php');
+            ?>
         </div>
         <h3 class="expQUATRE">Vorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.</h3>
     </section>
