@@ -1,12 +1,42 @@
+header{
+    position: sticky;
+    top: 0%;
+    background-color: #343A40;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 main{
     padding-left: 100px;
     padding-right: 100px;
 }
-
+.essence{
+    display: flex;
+    object-fit: cover;
+}
+.pageUN{
+    padding-top: 25px;
+}
+footer{
+    background-color: #343A40;
+    text-decoration: white;
+    padding-top: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    text-align: center;
+}
+.top{
+    position: relative;
+    align-items: center;
+}
 h1{
     margin: 60px;
     text-align: center;
 
+}
+#oeil{
+    padding-top: 60px;
 }
 main section.row{
     padding-right: 100px;
@@ -24,11 +54,15 @@ main section.row{
     margin-bottom: 80px;
     text-align: center;
 }
+.container.align-items-left{
+    display: flex;
+    position: static;
+
+}
 #map {
     height: 580px;
     width: 850px;
     display: flex;
-    justify-content: center;
     margin: 5%;
 }
 #photoOlfa{
@@ -37,7 +71,7 @@ main section.row{
 }
 .expDEUX{
     text-align: center;
-    margin-top: 800px;
+    margin-top: 100px;
     margin-bottom: 80px;
 }
 .expTROIS{
@@ -50,9 +84,31 @@ main section.row{
 }
 .expQUATRE{
     text-align: center;
-    padding-bottom: 300px;
+    padding-bottom: 150px;
 }
-footer{
-    background-color: #343A40;
-    text-decoration: white;
+#home{
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+#env{
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+#tel{
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+hr{
+    position: relative;
+    top: 10px;
+    border: none;
+    height: 12px;
+    background-color: white ;
+}
+.marg{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.fin{
+    padding-top: 7px;
 }

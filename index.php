@@ -12,45 +12,45 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand">Home</a>
-            <a class="nav-link" href="#">About</a>
-            <li class="nav-item">
-                <input
-                    class="form-control rounded"
-                    placeholder="Rechercher ..."
-                    aria-label="Search"
-                    aria-describedby="search-addon"
-                />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-search"></i>
-                </span>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+            <img class="top" src="img/logoHeader.png" alt="logo MOKU">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Rechercher ...">
                 <button type="button" class="btn btn-outline-success">Entrée</button>
+            </form>
         </div>
     </nav>
 </header>
 <main>
     <div class="pageUN">
-        <img src="img/pexels.jpg" height="500" width="1700">
-        <h2>En un coup d'oeil</h2>
+        <img src="img/pexels.jpg" height="500" width="1700" class="essence img-fluid" alt="essence">
+        <h2 id="oeil">En un coup d'oeil</h2>
         <p>Mise a jour le :jj/mm/aa</p>
     </div>
-    <section class="row">
+    <section class="row align-items-left">
         <div class="column">
-            <h1>4600</h1>
+            <h2>4600</h2>
             <h5>En augmentation depuis 2022</h5>
             <h5>Nombre de stations EN HAUTE-SAVOIE</h5>
             <p>lE NOMBRE DE STATION-SERVICE EST EN CONSTANTE AUGMENTATION ET LA HAUTE-SAVOIE N’Y FAIT PAS EXCEPTION !</p>
         </div>
         <div class="column">
-            <h1>1.60</h1>
+            <h2>1.60</h2>
             <h5>En augmentation depuis 2023</h5>
             <h5>PRIX MOYEN DEPUIS 2023</h5>
             <p>prix moyen de l’ÉSSENCE EN FRANCE LE PRIX MOYEN DE L’ÉSSENCE FACILEMENT ACCESSIBLE</p>
         </div>
         <div class="column">
-            <h1>8.6%</h1>
+            <h2>8.6%</h2>
             <h5>TAUX D’AUGMENTATION DEPUIS 2023</h5>
             <h5>AUGMENTATION du prix EN POURCENTAGE</h5>
             <p>L’ANNÉE 2023 A CONNU L’UNE DES CROISSANCES DE PRIX LES PLUS IMPORTANTES</p>
@@ -70,8 +70,8 @@
                 <h1>Station a Annecy !</h1>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
+        <div class="container align-items-left">
+            <div class="row align-items-stretch">
                 <div class="col-9">
                     <div id="map"></div>
                     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-3">
                     <div id="photoOlfa"></div>
-                    <img src="img/Capture%20d’écran%20du%202023-06-21%2015-12-47.png">
+                    <img src="img/olfa.png" alt="Photo Olfa">
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
                 <?php
                 $query = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
                                 JOIN carburant ON prix.carburant_id = carburant.id
-                               AND  carburant.nom = 'Gazole'
+                               -- AND  carburant.nom = 'Gazole'
                                 AND(extract(YEAR from date)=2007
                                 OR extract(YEAR from date)=2014
                                 OR extract(YEAR from date)=2023)
@@ -125,9 +125,8 @@
                     $extract[]=$data['extract'];
                 };
                 ?>
-
                 <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
-
+                <?php include 'footer.php'?>
                 <script >const barCanvas = document.getElementById("barCanvas");
                     // const moy2007= document.getElementById("phpLink")
                     const barChart = new Chart(barCanvas,{
@@ -140,41 +139,49 @@
                         }
                     })
                 </script>
+            </div>
         </div>
-
-
-
-
-
-
-
         <h3 class="expDEUX">Sur ce graphique , vous pouvez voir la moyenne des prix de carburants en France representer entre 2007 jusqu’en 2023 . </h3>
         <h3 class="expTROIS">Nous pouvons voir une augmentation remarcable , nous avons commencé a envrion 1 euro , puis d’année en année le prix n’a fais que augmenter jusqu’a arrivé a 2 euros ! </h3>
     </section>
     <section class="graphiqueDEUX">
         <h1 id="phraseTROIS">Evolution des prix moyens du carburant en France/Haute-savoie</h1>
-        <div class="metLeGraphiqueDeux">
-            <?php
-            require('graphiqueE10.php');
-            ?>
-        </div>
+        <div class="metLeGraphiqueDeux"></div>
         <h3 class="expQUATRE">Vorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.</h3>
     </section>
 </main>
 <footer>
-    <section class="row">
-        <div class="column">
+    <section class="row align-items-center">
+        <div class="column text-white">
+            <img id="home" src="img/Vector.png" alt="maison">
             <h5>Annecy 74000,France</h5>
-            <h5>Fuel-France@info.fr</h5>
-            <h5>07 98 56 31 67</h5>
-        </div>
-        <div class="column">
             <h5>https://www.service-public.fr</h5>
+        </div>
+        <div class="column text-white">
+            <h5><img id="env" src="img/env.png">Fuel-France@info.fr</h5>
             <h5>https://www.prix-carburants.gouv.fr</h5>
+        </div>
+        <div class="column text-white">
+            <h5><img id="tel" src="img/tel.png">07 98 56 31 67</h5>
             <h5>https://www.data.gouv.fr/fr</h5>
         </div>
     </section>
-
+    <hr class="background-color-white">
+    <div class="marg">
+        <div class="container">
+            <section class="row align-items-start justify-content-md-center">
+                <div class="col col-lg-2">
+                    <img src="img/logoFooter.png">
+                </div>
+                <div class="col col-lg-2">
+                    <img src="img/cFooter.png">
+                </div>
+                <div class="col col-lg-2">
+                    <p class="fin text-white">2023 Copyright, Inc</p>
+                </div>
+            </section>
+        </div>
+    </div>
 </footer>
 
 </body>
