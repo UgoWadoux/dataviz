@@ -113,7 +113,7 @@
                 <?php
                 $query = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
                                 JOIN carburant ON prix.carburant_id = carburant.id
-                               -- AND  carburant.nom = 'Gazole'
+                               AND  carburant.nom = 'Gazole'
                                 AND(extract(YEAR from date)=2007
                                 OR extract(YEAR from date)=2014
                                 OR extract(YEAR from date)=2023)
