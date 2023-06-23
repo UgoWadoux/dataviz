@@ -56,7 +56,7 @@
     <div class="pageUN">
         <img src="img/pexels.jpg" height="500" width="1700" class="essence img-fluid" alt="essence">
         <h2 id="oeil">En un coup d'oeil</h2>
-        <p>Mise a jour le :jj/mm/aa</p>
+        <p>Mises a jour le :jj/mm/aa</p>
     </div>
     <section class="row align-items-left">
         <div class="column">
