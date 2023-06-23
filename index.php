@@ -45,6 +45,9 @@
                     </li>
                 </ul>
             </div>
+            <div>
+
+            </div>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Rechercher ...">
                 <button type="button" class="btn btn-outline-success">Entrée</button>
