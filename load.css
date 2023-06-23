@@ -1,7 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Oswald';
 .loads{
     background: #005C97;
-    background: linear-gradient(to left, #005C97 , #363795);
+    background: linear-gradient(to left, #343A40 , #000000);
     height: 100%;
     width: 100%;
     display: flex;
@@ -10,7 +10,12 @@
     font-family: 'Oswald', sans-serif;
     letter-spacing: 6px;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
+    z-index: 999;
+}
+
+.hide{
+    display: none;
 }
 
 .water-fill {

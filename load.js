@@ -1,5 +1,13 @@
-const loader = document.querySelector('.loader')
+var loader = document.getElementById('pageLoader')
+console.log(loader);
 
-window.addEventListener('load',() =>){
-    loader.classList.add('loads');
-}
+/*window.addEventListener('DOMContentLoaded',() => {
+    // Faire quelque chose pour que le loader disparaissent
+    loader.classList.add('hide');
+
+})*/
+
+setTimeout(() => {
+    loader.classList.add('hide');
+    console.log("Delayed for 5 second.");
+}, 15000);
