@@ -20,7 +20,7 @@
           <path fill="#FB9366" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
       </pattern>
 
-      <text id="text" transform="matrix(1 0 0 1 -8.0684 116.7852)" font-size="125">ERROR 404</text>
+      <text id="text" transform="matrix(1 0 0 1 -8.0684 116.7852)" font-size="125">OLFA FUEL</text>
 
       <mask id="text_mask">
           <use x="0" y="0" xlink:href="#text" opacity="1" fill="#FDD238"/>
@@ -188,27 +188,85 @@
             <a class="btn btn-primary" href="/?url=GAZOLE" role="button">GAZOLE</a>
             <a class="btn btn-primary" href="/?url=SP98" role="button">SP98</a>
             <?php
+            $varCarbur =NULL;
             switch ($_GET['url']){
+
                 case 'SP95';
-                require ('graphiqueSP95.php');
-                break;
+                    $varCarbur= "SP95";
+                    break;
                 case 'SP98';
-                    require ('graphiqueSP98.php');
+                    $varCarbur= 'SP98';
                     break;
                 case 'E85';
-                    require ('graphiqueE85.php');
+                    $varCarbur= 'E85';
                     break;
                 case 'GAZOLE';
-                    require ('graphiqueGazole.php');
+                    $varCarbur= 'Gazole';
                     break;
                 case 'GLPC';
-                    require ('graphiqueGPLC.php');
+                    $varCarbur= 'GPLc';
                     break;
                 default;
-                require ('graphiqueE10.php');
-                break;
+                    $varCarbur= 'E10';
+                    break;
+            };
+
+
+            $queryHSE10 = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
+    JOIN carburant ON prix.carburant_id = carburant.id
+    JOIN point_de_vente ON prix.point_de_vente_id = point_de_vente.id
+    AND  carburant.nom = '$varCarbur'
+    AND left(code_postal,2)= '74'
+    AND(extract(YEAR from date)=2007
+        OR extract(YEAR from date)=2014
+        OR extract(YEAR from date)=2023)
+GROUP BY extract(YEAR from date)");
+
+            $queryFE10 = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
+                                JOIN carburant ON prix.carburant_id = carburant.id
+                               AND  carburant.nom ='$varCarbur'
+                                AND(extract(YEAR from date)=2007
+                                OR extract(YEAR from date)=2014
+                                OR extract(YEAR from date)=2023)
+                                GROUP BY extract(YEAR from date)");
+
+            foreach ($queryHSE10 as $data)
+            {
+                $avgHSE10[]=$data['avg'];
+                $extractHSE10[]=$data['extract'];
+            }
+            foreach ($queryFE10 as $data)
+            {
+                $avgFE10[]=$data['avg'];
+                $extractFE10[]=$data['extract'];
             }
             ?>
+
+
+            <canvas id="barCanvasE10" aria-label="chart" role="img"></canvas>
+
+            <script>
+                const barCanvasE10 = document.getElementById("barCanvasE10");
+                // const moy2007= document.getElementById("phpLink")
+                const barChartE10 = new Chart(barCanvasE10,{
+                    type:"bar",
+                    data:{
+                        labels: <?php echo json_encode($extractFE10)?>,
+                        datasets:[
+                            {
+                                label: "France",
+                                data: <?php echo json_encode($avgFE10)?>,
+                            },
+                            {
+                                label: "Haute Savoie",
+                                data:<?php echo json_encode($avgHSE10)?>
+                            }
+                        ]
+                    }
+                })
+            </script>
+
+
 
         </div>
         <h3 class="expQUATRE">Vorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.</h3>

@@ -19,8 +19,8 @@
 }
 
 .water-fill {
-    animation: wave 0.7s infinite linear,
-    fill-up 10s infinite ease-out alternate;
+    animation: wave 1.5s infinite linear,
+    fill-up 4s infinite ease-out alternate;
 }
 
 @keyframes wave {
