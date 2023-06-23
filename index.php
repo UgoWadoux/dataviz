@@ -241,7 +241,7 @@
                     <img src="img/cFooter.png">
                 </div>
                 <div class="col col-lg-2">
-                    <p class="fin text-white">2023 Copyright, Inc</p>
+                    <p class="fin text-white">2023 Copyrightt, Inc</p>
                 </div>
             </section>
         </div>
