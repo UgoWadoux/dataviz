@@ -7,6 +7,9 @@ header{
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.top{
+    margin-right: 50px;
+}
 main{
     padding-left: 100px;
     padding-right: 100px;
@@ -112,3 +115,5 @@ hr{
 .fin{
     padding-top: 7px;
 }
+
+
