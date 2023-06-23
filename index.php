@@ -171,7 +171,42 @@
     </section>
     <section class="graphiqueDEUX">
         <h1 id="phraseTROIS">Evolution des prix moyens du carburant en France/Haute-savoie</h1>
-        <div class="metLeGraphiqueDeux"></div>
+        <div class="metLeGraphiqueDeux">
+            <a class="btn btn-primary" href="/?url=SP95" role="button">SP95</a>
+            <a class="btn btn-primary" href="/?url=E10" role="button">E10</a>
+            <a class="btn btn-primary" href="/?url=E85" role="button">E85</a>
+            <a class="btn btn-primary" href="/?url=GPLC" role="button">GPLC</a>
+            <a class="btn btn-primary" href="/?url=GAZOLE" role="button">GAZOLE</a>
+            <a class="btn btn-primary" href="/?url=SP98" role="button">SP98</a>
+            <?php
+            switch ($_GET['url']){
+                case 'SP95';
+                require ('graphiqueSP95.php');
+                break;
+                case 'SP98';
+                    require ('graphiqueSP98.php');
+                    break;
+                case 'E85';
+                    require ('graphiqueE85.php');
+                    break;
+                case 'GAZOLE';
+                    require ('graphiqueGazole.php');
+                    break;
+                case 'GLPC';
+                    require ('graphiqueGPLC.php');
+                    break;
+                default;
+                require ('graphiqueE10.php');
+                break;
+            }
+            ?>
+
+
+
+
+
+
+        </div>
         <h3 class="expQUATRE">Vorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.</h3>
     </section>
 </main>
