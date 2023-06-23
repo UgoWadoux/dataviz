@@ -150,17 +150,26 @@
                     $extract[]=$data['extract'];
                 };
                 ?>
-                <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
-                <?php include 'footer.php'?>
-                <script >const barCanvas = document.getElementById("barCanvas");
+                <div>
+                <canvas id="barCanvas" ></canvas>
+                </div>
+                <script >
+                    const graphUn = document.getElementById("barCanvas");
                     // const moy2007= document.getElementById("phpLink")
-                    const barChart = new Chart(barCanvas,{
+                    new Chart(graphUn,{
                         type:"bar",
-                        data:{
+                        data: {
                             labels:<?php echo json_encode($extract)?>,
                             datasets:[{
-                                data: <?php echo json_encode($avg)?>
-                            }]
+                                label: 'Moyenne en France',
+                                data: <?php echo json_encode($avg)?>,
+                                borderWidth: 3
+                            },
+                                {
+                                    label: 'Moyenne en Haute-Savoie',
+                                    data: <?php echo json_encode($avg)?>,
+                                    borderWidth: 3
+                                }]
                         }
                     })
                 </script>
