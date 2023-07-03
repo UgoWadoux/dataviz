@@ -144,11 +144,27 @@
                                 OR extract(YEAR from date)=2023)
                                 GROUP BY extract(YEAR from date)");
 
+
+                $queryHS = $pdo->query(
+                    "SELECT AVG(valeur), extract(YEAR from date) FROM prix
+    JOIN carburant ON prix.carburant_id = carburant.id
+    JOIN point_de_vente ON prix.point_de_vente_id = point_de_vente.id
+    AND left(code_postal,2)= '74'
+    AND(extract(YEAR from date)=2007
+        OR extract(YEAR from date)=2014
+        OR extract(YEAR from date)=2023)
+GROUP BY extract(YEAR from date)"
+                );
+
                 foreach ($query as $data)
                 {
                     $avg[]=$data['avg'];
                     $extract[]=$data['extract'];
                 };
+
+                foreach ($queryHS as $data2){
+                    $avgHS[]=$data2['avg'];
+                }
                 ?>
                 <div>
                 <canvas id="barCanvas" ></canvas>
@@ -167,7 +183,7 @@
                             },
                                 {
                                     label: 'Moyenne en Haute-Savoie',
-                                    data: <?php echo json_encode($avg)?>,
+                                    data: <?php echo json_encode($avgHS)?>,
                                     borderWidth: 3
                                 }]
                         }
