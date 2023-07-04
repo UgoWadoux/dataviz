@@ -337,6 +337,7 @@ GROUP BY extract(YEAR from date)");
                 // const moy2007= document.getElementById("phpLink")
                 const barChartE10 = new Chart(barCanvasE10,{
                     type:"bar",
+
                     data:{
                         labels: <?php echo json_encode($extractFE10)?>,
                         datasets:[
@@ -349,6 +350,20 @@ GROUP BY extract(YEAR from date)");
                                 data:<?php echo json_encode($avgHSE10)?>
                             }
                         ]
+                    },
+                    options:{
+                        scales:{
+                            y:{
+                                beginAtZero: true,
+                                min:0,
+                                max:3,
+                                grace: '5%',
+                                ticks:{
+                                    stepSize: 0.00001
+
+                                }
+                            }
+                        }
                     }
                 })
             </script>
@@ -358,6 +373,52 @@ GROUP BY extract(YEAR from date)");
         </div>
         <h3 class="expQUATRE">Vorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.</h3>
     </section>
+    <div>
+        <canvas id="barCanvasDeux" ></canvas>
+    </div>
+    <?php
+    $queryRuptureF = $pdo->query("SELECT count(rupture.carburant_id), nom FROM rupture
+                        JOIN carburant c on c.id = rupture.carburant_id
+                        GROUP BY nom");
+    $queryRuptureHS = $pdo->query("SELECT count(rupture.carburant_id), nom FROM rupture
+                        JOIN carburant c on c.id = rupture.carburant_id
+                        join point_de_vente on rupture.point_de_vente_id = point_de_vente.id
+                        where left(code_postal,2)= '74'
+                        GROUP BY nom");
+    foreach ($queryRuptureF as $dataRuptureF){
+        $NbSationRupture[] = $dataRuptureF['count'];
+        $NomCarburant[] = $dataRuptureF['nom'];
+    };
+    foreach ($queryRuptureHS as $dataRuptureHS){
+        $NbSationRuptureHS []= $dataRuptureHS['count'];
+    }
+    ?>
+
+    <script >
+        const graphDeux = document.getElementById("barCanvasDeux");
+        // const moy2007= document.getElementById("phpLink")
+        new Chart(graphDeux,{
+            type:"doughnut",
+            data: {
+                labels:<?php echo json_encode($NomCarburant)?>,
+                datasets:[{
+                    borderDash: [1],
+                    label: 'Nombre de fois que le carburant a été en rupture en France',
+                    data: <?php echo json_encode($NbSationRupture)?>,
+                    borderWidth: 2
+                },
+                    {
+                        borderDash: [1],
+                        label: 'Nombre de fois que le carburant a été en rupture en Haute-Savoie',
+                        data: <?php echo json_encode($NbSationRuptureHS)?>,
+                        borderWidth: 2
+                    }
+
+            ]
+            }
+        })
+    </script>
+    </div>
 </main>
 <footer>
     <section class="row align-items-center">
