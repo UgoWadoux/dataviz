@@ -56,6 +56,26 @@
     </nav>
 </header>
 <main>
+    <?php
+    $pdo = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
+    //            $query = $pdo->query('SELECT * FROM carburant');
+    //            $post = $query->fetchAll();
+    //            echo '<pre>';
+    //            print_r($post);
+    //            echo '</pre>';
+    //            phpinfo();
+
+    //            try
+    //            {
+    //                $connexion = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
+    //            }
+    //
+    //            catch(Exception $e)
+    //            {
+    //                echo 'Erreur : '.$e->getMessage().'<br />';
+    //                echo 'N° : '.$e->getCode();
+    //            }
+    ?>
     <div class="pageUN">
         <img src="img/pexels.jpg" height="500" width="1700" class="essence img-fluid" alt="essence">
         <h2 id="oeil">En un coup d'oeil</h2>
@@ -63,25 +83,96 @@
     </div>
     <section class="row align-items-left">
         <div class="column">
-            <h2>4600</h2>
-            <h5>En augmentation depuis 2022</h5>
+            <?php
+            $queryNbSation = $pdo->query("SELECT count( DISTINCT point_de_vente.id) , extract(YEAR from date)FROM point_de_vente
+                            JOIN prix p on point_de_vente.id = p.point_de_vente_id
+                            WHERE left(code_postal,2)= '74'
+                            AND extract(YEAR from date)=2023
+                            GROUP BY extract(YEAR from date)");
+            foreach ($queryNbSation as $dataStation):
+            ?>
+            <h2><?php
+                echo $dataStation['count'];
+                ?>
+            </h2>
+            <?php
+            endforeach;
+            ?>
+            <h5>En augmentation depuis 2007</h5>
             <h5>Nombre de stations EN HAUTE-SAVOIE</h5>
             <p>lE NOMBRE DE STATION-SERVICE EST EN CONSTANTE AUGMENTATION ET LA HAUTE-SAVOIE N’Y FAIT PAS EXCEPTION !</p>
         </div>
         <div class="column">
-            <h2>1.60</h2>
-            <h5>En augmentation depuis 2023</h5>
+            <?php
+            $queryStation2424= $pdo->query("SELECT count( DISTINCT point_de_vente.id), extract(YEAR  from date) FROM point_de_vente
+                                    JOIN prix p on point_de_vente.id = p.point_de_vente_id
+                                    WHERE left(code_postal,2)= '74'
+                                    AND point_de_vente.automate_24_24= true
+                                      AND extract(YEAR from date)=2023
+                                    GROUP BY extract(YEAR from date)");
+            foreach ($queryStation2424 as $dataStation2424):
+            ?>
+
+            <h2><?php
+             echo $dataStation2424['count']
+            ?>
+            </h2>
+            <?php
+            endforeach;
+            ?>
+            <h5>Nombre de Station ouvertes 24H/24</h5>
             <h5>PRIX MOYEN DEPUIS 2023</h5>
             <p>prix moyen de l’ÉSSENCE EN FRANCE LE PRIX MOYEN DE L’ÉSSENCE FACILEMENT ACCESSIBLE</p>
         </div>
         <div class="column">
-            <h2>8.6%</h2>
+            <?php
+            $queryPourcentage1 = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
+                                    JOIN point_de_vente ON prix.point_de_vente_id = point_de_vente.id
+                                    where left(code_postal,2)= '74'
+                                     and extract(YEAR from date)=2014
+                                    GROUP BY extract(YEAR from date)");
+
+            $queryPourcentage2 = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
+                                    JOIN point_de_vente ON prix.point_de_vente_id = point_de_vente.id
+                                    where left(code_postal,2)= '74'
+                                     and extract(YEAR from date)=2023
+                                    GROUP BY extract(YEAR from date)");
+            foreach ($queryPourcentage1 as $dataPourcentage1){
+            $nb1 []= $dataPourcentage1['avg'];
+            };
+            foreach ($queryPourcentage2 as $dataPourcentage2){
+                $nb2[] =$dataPourcentage2['avg'];
+            };
+            $result = (($nb2[0]-$nb1[0])/$nb1[0])*100
+            ?>
+
+            <h2><?php
+                echo number_format($result,2)."%";
+                ?>
+
+            </h2>
+
             <h5>TAUX D’AUGMENTATION DEPUIS 2023</h5>
             <h5>AUGMENTATION du prix EN POURCENTAGE</h5>
             <p>L’ANNÉE 2023 A CONNU L’UNE DES CROISSANCES DE PRIX LES PLUS IMPORTANTES</p>
         </div>
         <div class="column">
-            <h1>1.65</h1>
+            <?php
+            $queryActualPrice = $pdo->query("SELECT AVG(valeur)FROM prix
+                                JOIN carburant ON prix.carburant_id = carburant.id
+                                JOIN point_de_vente ON prix.point_de_vente_id = point_de_vente.id
+                                    AND left(code_postal,2)= '74'
+                                    AND prix.date::text LIKE '2023-05-24%'");
+            foreach ($queryActualPrice as $dataActualPrice):
+            ?>
+            <h2> <?php
+                echo number_format($dataActualPrice['avg'],2)."€";
+                ?>
+
+            </h2>
+            <?php
+            endforeach;
+            ?>
             <h5>En augmentation depuis 2023</h5>
             <h5>COûT DE L’éSSENCE ACTUEL</h5>
             <p>ACTUALISE CHAQUE JOUR IL S’AGIT DU PRIX MOYEN DE L’ESSENCE EN HAUTE SAVOIE</p>
@@ -114,26 +205,6 @@
     <section class="graphiqueUN">
         <h1 id="phraseDEUX">Evolution du prix moyen du Carburant en France</h1>
         <div class="metLeGraphique">
-            <?php
-            $pdo = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
-//            $query = $pdo->query('SELECT * FROM carburant');
-//            $post = $query->fetchAll();
-//            echo '<pre>';
-//            print_r($post);
-//            echo '</pre>';
-//            phpinfo();
-
-//            try
-//            {
-//                $connexion = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
-//            }
-//
-//            catch(Exception $e)
-//            {
-//                echo 'Erreur : '.$e->getMessage().'<br />';
-//                echo 'N° : '.$e->getCode();
-//            }
-            ?>
             <div id="phpLink">
                 <?php
                 $query = $pdo->query("SELECT AVG(valeur), extract(YEAR from date) FROM prix
