@@ -250,13 +250,31 @@ GROUP BY extract(YEAR from date)"
                             datasets:[{
                                 label: 'Moyenne en France',
                                 data: <?php echo json_encode($avg)?>,
-                                borderWidth: 3
+                                backgroundColor:'#FB9366',
+                                borderColor:'#FB9366'
                             },
                                 {
                                     label: 'Moyenne en Haute-Savoie',
                                     data: <?php echo json_encode($avgHS)?>,
-                                    borderWidth: 3
-                                }]
+                                    backgroundColor: '#FDD238',
+                                    borderColor:'#FDD238'
+                                }],
+
+                        },
+
+                        options:{
+                            scales:{
+                                y:{
+                                    beginAtZero: true,
+                                    min:0,
+                                    max:2,
+                                    grace: '5%',
+                                    ticks:{
+                                        stepSize: 0.002
+
+                                    }
+                                }
+                            }
                         }
                     })
                 </script>
@@ -344,10 +362,14 @@ GROUP BY extract(YEAR from date)");
                             {
                                 label: "France",
                                 data: <?php echo json_encode($avgFE10)?>,
+                                backgroundColor:'#FB9366',
+                                borderColor:'#FB9366'
                             },
                             {
                                 label: "Haute Savoie",
-                                data:<?php echo json_encode($avgHSE10)?>
+                                data:<?php echo json_encode($avgHSE10)?>,
+                                backgroundColor: '#FDD238',
+                                borderColor:'#FDD238'
                             }
                         ]
                     },
@@ -356,10 +378,10 @@ GROUP BY extract(YEAR from date)");
                             y:{
                                 beginAtZero: true,
                                 min:0,
-                                max:3,
+                                max:2,
                                 grace: '5%',
                                 ticks:{
-                                    stepSize: 0.00001
+                                    stepSize: 0.002
 
                                 }
                             }
