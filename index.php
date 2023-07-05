@@ -555,13 +555,15 @@ GROUP BY extract(YEAR from date)");
                     borderDash: [1],
                     label: 'Nombre de fois que le carburant a été en rupture en France',
                     data: <?php echo json_encode($NbSationRupture)?>,
-                    borderWidth: 2
+                    borderWidth: 2,
+                    backgroundColor: ['#FDD238','#FB9366','#343A40','#B0E0E6','#808000','#E6E6FA'],
                 },
                     {
                         borderDash: [1],
                         label: 'Nombre de fois que le carburant a été en rupture en Haute-Savoie',
                         data: <?php echo json_encode($NbSationRuptureHS)?>,
-                        borderWidth: 2
+                        borderWidth: 2,
+                        backgroundColor: ['#FDD238','#FB9366','#343A40','#B0E0E6','#808000','#E6E6FA'],
                     }
 
             ]
