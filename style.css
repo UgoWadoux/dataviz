@@ -8,6 +8,19 @@ header{
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.progress {
+    height: 2px;
+    color: #FFFFFF;
+    position: fixed;
+    top: 110px;
+    left: 0;
+    right: 0;
+}
+.pou {
+    width: 0;
+    background-color: #FDD238;
+
+}
 .top{
     margin-right: 50px;
 }
@@ -15,12 +28,21 @@ main{
     padding-left: 100px;
     padding-right: 100px;
 }
+body{
+    cursor: url("./img/Olfast.png"), default;
+}
 .essence{
     display: flex;
     object-fit: cover;
+
 }
 .pageUN{
-    padding-top: 25px;
+    width: 100%;
+
+}
+.item{
+    padding-top: 10px;
+    padding-bottom: 30px;
 }
 footer{
     background-color: #343A40;
@@ -45,7 +67,8 @@ h1{
 main section.row{
     padding-right: 100px;
     padding-left: 100px;
-    box-shadow: 0px 0px 18px 2px black;
+    box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.25);
+    border-radius: 12px;
 }
 .column{
     flex: 1;
@@ -63,17 +86,42 @@ main section.row{
     position: static;
 
 }
+.phrase{
+    padding-bottom: 75px;
+}
 #map {
-    height: 580px;
-    width: 850px;
-    display: flex;
+    height: 500px;
+    width: 600px;
+    padding-bottom: 60px;
     margin: 5%;
     z-index: 0;
+    box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.25);
 }
-#photoOlfa{
-    display: flex;
-    margin: 3%;
+.photoOlf{
+    width: 600px;
+    height: 700px;
+    padding-bottom: 30px;
+    margin: -40px auto;
+    overflow: hidden;
 }
+.photoOlf .ol{
+    width: 100%;
+    transition: 1s;
+}
+.photoOlf .ol:hover{
+    transform: scale(1.5);
+    cursor: pointer;
+}
+.ol{
+    margin-left: 10%;
+    justify-content: center;
+    object-fit: contain;
+}
+#phraseDEUX{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 .expDEUX{
     text-align: center;
     margin-top: 100px;
@@ -90,6 +138,11 @@ main section.row{
 .expQUATRE{
     text-align: center;
     padding-bottom: 150px;
+}
+
+
+.cam{
+    padding-top: 1000px;
 }
 #home{
     padding-right: 10px;
@@ -109,6 +162,7 @@ hr{
     border: none;
     height: 12px;
     background-color: white ;
+    border-radius: 12px;
 }
 .marg{
     padding-top: 20px;

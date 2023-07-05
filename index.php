@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="load.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="date.js" async></script>
     <title>Title</title>
+    <script src="progression.js"></script>
 </head>
 <body>
 <div class="loads" id="pageLoader">
@@ -54,7 +56,13 @@
             </form>
         </div>
     </nav>
+    <div class="progress">
+        <div class="pou"></div>
+    </div>
 </header>
+<div class="pageUN">
+    <img src="img/pexels-skitterphoto-9796%201.png" class="essence img-fluid" alt="essence">
+</div>
 <main>
     <?php
     $pdo = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432','postgres','password');
@@ -76,10 +84,9 @@
     //                echo 'N° : '.$e->getCode();
     //            }
     ?>
-    <div class="pageUN">
-        <img src="img/pexels.jpg" height="500" width="1700" class="essence img-fluid" alt="essence">
         <h2 id="oeil">En un coup d'oeil</h2>
-        <p>Mises a jour le :jj/mm/aa</p>
+
+        <p class="item">Mises a jour le : <span class="item" id='date'></span></p>
     </div>
     <section class="row align-items-left">
         <div class="column">
@@ -186,18 +193,19 @@
                 <h1>Station a Annecy !</h1>
             </div>
         </div>
-        <div class="container align-items-left">
-            <div class="row align-items-stretch">
-                <div class="col-9">
+        <div class="container">
+            <div class="row">
+                <div class="column">
                     <div id="map"></div>
-                    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                    <script id="mod" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
                             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
                             crossorigin=""></script>
                     <script src="main.js"></script>
                 </div>
-                <div class="col-3">
-                    <div id="photoOlfa"></div>
-                    <img src="img/olfa.png" alt="Photo Olfa">
+                <div class="column">
+                    <div class="photoOlf">
+                        <img class="ol" src="img/olfa.png" alt="Photo Olfa">
+                    </div>
                 </div>
             </div>
         </div>
@@ -355,7 +363,6 @@ GROUP BY extract(YEAR from date)");
                 // const moy2007= document.getElementById("phpLink")
                 const barChartE10 = new Chart(barCanvasE10,{
                     type:"bar",
-
                     data:{
                         labels: <?php echo json_encode($extractFE10)?>,
                         datasets:[
