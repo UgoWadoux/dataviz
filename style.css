@@ -118,4 +118,12 @@ hr{
     padding-top: 7px;
 }
 
+#barCanvasDeux {
+    display: flex;
+    align-items: center;
 
+    margin-bottom: 100px;
+    height: 700px !important;
+    width: 700px !important;
+
+}

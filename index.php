@@ -99,8 +99,8 @@
             endforeach;
             ?>
             <h5>En augmentation depuis 2007</h5>
-            <h5>Nombre de stations EN HAUTE-SAVOIE</h5>
-            <p>lE NOMBRE DE STATION-SERVICE EST EN CONSTANTE AUGMENTATION ET LA HAUTE-SAVOIE N’Y FAIT PAS EXCEPTION !</p>
+            <h5>Nombre de stations en Haute-Savoie</h5>
+            <p>Le nombre de station-service est en constante augmentation et la Haute-Savoie n'y fait pas exception.</p>
         </div>
         <div class="column">
             <?php
@@ -120,9 +120,9 @@
             <?php
             endforeach;
             ?>
-            <h5>Nombre de Station ouvertes 24H/24</h5>
-            <h5>PRIX MOYEN DEPUIS 2023</h5>
-            <p>prix moyen de l’ÉSSENCE EN FRANCE LE PRIX MOYEN DE L’ÉSSENCE FACILEMENT ACCESSIBLE</p>
+            <h5>En augmentation depuis 2007</h5>
+            <h5>Nombre de station ouvertes 24H/24H</h5>
+            <p>Les stations services se rendent de plus en plus disponible pour les utilisateurs, et cela passent par les horraires d'ouvertures et de fermetures.</p>
         </div>
         <div class="column">
             <?php
@@ -152,9 +152,9 @@
 
             </h2>
 
-            <h5>TAUX D’AUGMENTATION DEPUIS 2023</h5>
-            <h5>AUGMENTATION du prix EN POURCENTAGE</h5>
-            <p>L’ANNÉE 2023 A CONNU L’UNE DES CROISSANCES DE PRIX LES PLUS IMPORTANTES</p>
+            <h5>En constante augmentation</h5>
+            <h5>Augmentation moyenne du prix du carburant depuis 2014 en pourcentage</h5>
+            <p>Ces dernières années ont connu une hausse du prix du carburant importante (ce pourcentage ne concerne que la période 2014 - 2023)</p>
         </div>
         <div class="column">
             <?php
@@ -173,12 +173,12 @@
             <?php
             endforeach;
             ?>
-            <h5>En augmentation depuis 2023</h5>
-            <h5>COûT DE L’éSSENCE ACTUEL</h5>
-            <p>ACTUALISE CHAQUE JOUR IL S’AGIT DU PRIX MOYEN DE L’ESSENCE EN HAUTE SAVOIE</p>
+            <h5>En augmentation par rapport a la veille</h5>
+            <h5>Dernière moyenne quotidienne du coût de l'essence</h5>
+            <p>Actualisé chaque jour, il s'agit du prix moyen du carburant en Haute-Savoie.</p>
         </div>
     </section>
-    <h2 class="expUN">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h2>
+    <h2 class="expUN">Pour rappel ce site est un site a but non lucratif fondé par une petite équipe soudée, nous nous sommes inspirés de site gouvernementaux, et les infos viennent d'une base de donnée vérifiée et officielle. </h2>
 
     <section class="map">
         <div class="wrapper">
@@ -284,7 +284,7 @@ GROUP BY extract(YEAR from date)"
         <h3 class="expTROIS">Nous pouvons voir une augmentation remarcable , nous avons commencé a envrion 1 euro , puis d’année en année le prix n’a fais que augmenter jusqu’a arrivé a 2 euros ! </h3>
     </section>
     <section class="graphiqueDEUX">
-        <h1 id="phraseTROIS">Evolution des prix moyens du carburant en France/Haute-savoie</h1>
+        <h1 id="phraseTROIS">Evolution des prix pour chaque carburant en France/Haute-savoie</h1>
         <div class="metLeGraphiqueDeux">
             <a class="btn btn-primary" href="/?url=SP95" role="button">SP95</a>
             <a class="btn btn-primary" href="/?url=E10" role="button">E10</a>
@@ -396,7 +396,16 @@ GROUP BY extract(YEAR from date)");
         <h3 class="expQUATRE">Vorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.</h3>
     </section>
     <div>
-        <canvas id="barCanvasDeux" ></canvas>
+        <h1 id="phraseTROIS">Nombre de ruptures pour chaques carburant en France et en Haute-Savoie de 2007 a 2023 </h1>
+     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <canvas id="barCanvasDeux" ></canvas>
+            </div>
+
+        </div>
+
     </div>
     <?php
     $queryRuptureF = $pdo->query("SELECT count(rupture.carburant_id), nom FROM rupture
@@ -415,8 +424,7 @@ GROUP BY extract(YEAR from date)");
         $NbSationRuptureHS []= $dataRuptureHS['count'];
     }
     ?>
-
-    <script >
+    <script>
         const graphDeux = document.getElementById("barCanvasDeux");
         // const moy2007= document.getElementById("phpLink")
         new Chart(graphDeux,{

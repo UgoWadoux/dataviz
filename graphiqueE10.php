@@ -38,7 +38,8 @@ GROUP BY extract(YEAR from date)");
         // const moy2007= document.getElementById("phpLink")
         const barChartE10 = new Chart(barCanvasE10,{
             type:"bar",
-            data:{
+            data: {
+                scales:{}
                 labels: <?php echo json_encode($extractFE10)?>,
                 datasets:[
                     {
