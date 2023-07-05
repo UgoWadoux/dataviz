@@ -7,7 +7,8 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin="">
     <link rel="stylesheet" href="load.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="date.js" async></script>
     <title>Title</title>
@@ -206,6 +207,118 @@
                     <div class="photoOlf">
                         <img class="ol" src="img/olfa.png" alt="Photo Olfa">
                     </div>
+
+
+                    <div>
+                        <?php
+                   //     $pdo = new PDO('pgsql:dbname=fuel-dataviz;host=localhost;port=5432', 'postgres', 'password');
+
+                        $queryMap = $pdo->query("SELECT latitude, longitude 
+                                                       FROM point_de_vente
+                                                       WHERE left(code_postal,2)= '74'");
+                        foreach ($queryMap as $key ) {
+                            $latitude[] = $key['latitude'];
+                            $longitude[] = $key['longitude'];
+                        };
+//                        $test = count($latitude);
+//                        var_dump($test);
+
+                        $positionTab = [];
+                        for ($i=0;$i<count($latitude);$i++){
+                            $positionTab[$i] =[$latitude[$i], $longitude[$i]];
+                        };
+
+                        $queryAdresse = $pdo->query("SELECT adresse
+                                                           FROM point_de_vente
+                                                           WHERE left(code_postal,2)= '74'");
+
+                        foreach ($queryAdresse as $data){
+                            $adresse[]= $data['adresse'];
+                        };
+
+                        $adresseMap = [];
+                        for ($j=0;$j<count($adresse);$j++){
+                            $adresseMap[$j] = [$adresse[$j]];
+
+                        };
+
+                        $queryVille = $pdo->query("SELECT ville fROM point_de_vente
+                                                         WHERE left(code_postal,2)= '74'");
+                        foreach ($queryVille as $data){
+                            $ville[]= $data['ville'];
+                        };
+                        $adresseVille = [];
+                        for ($k=0;$k<count($ville);$k++){
+                            $adresseVille[$k] = [$ville[$k]];
+                        };
+
+
+                        $queryType = $pdo->query("SELECT type fROM point_de_vente
+                                                         WHERE left(code_postal,2)= '74'");
+
+                        foreach ($queryType as $data){
+                            $type[]= $data['type'];
+                        };
+                        $adresseType = [];
+                        for ($p=0;$p<count($type);$p++){
+                            $adresseType[$p] = [$type[$p]];
+                        };
+
+                        ?>
+
+                        <script>
+                            let coords = [];
+                            coords.push(<?php echo json_encode($positionTab)?>);
+                            coords = coords[0];
+
+                            let noms = [];
+                            noms.push(<?php echo json_encode($adresseMap)?>);
+                            noms = noms[0];
+
+
+                            let ville = [];
+                            ville.push(<?php echo json_encode($adresseVille)?>);
+                            ville = ville[0];
+
+
+                            let type = [];
+                            type.push(<?php echo json_encode($adresseType)?>);
+                            type = type[0];
+
+                           let newType = type.map(element =>{
+                               if (element == 'R'){
+                                   return 'sur la ROUTE';
+                               } else if (element == 'A'){
+                                   return 'sur l`AUTOROUTE'
+                               } else {
+                                   return element
+                               }
+                           });
+                           console.log(newType);
+
+
+                          var map = L.map('map').setView([45.89860986946062, 6.12917203841142], 13);
+
+                            var CartoDB_VoyagerLabelsUnder = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
+                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                                subdomains: 'abcd',
+                                maxZoom: 20
+                            }).addTo(map);
+
+
+                            let queryLength = ville.length;
+                           // console.log(queryLength);
+
+                            for (let i = 0; i <queryLength; i++) {
+                                var pop = L.popup({
+                                    closeOnClick: true
+                                }).setContent('<h6>Adresse : ' + noms[i] + '<h6>Ville : '+ ville[i] +'<h6>Type : '+ newType[i]);
+
+                                var marker = L.marker(coords[i]).addTo(map).bindPopup(pop);
+                            }
+                        </script>
+                    </div>
+
                 </div>
             </div>
         </div>
